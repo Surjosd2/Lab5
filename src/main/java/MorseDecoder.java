@@ -52,8 +52,14 @@ public class MorseDecoder {
         double[] returnBuffer = new double[totalBinCount];
 
         double[] sampleBuffer = new double[BIN_SIZE * inputFile.getNumChannels()];
+        inputFile.readFrames(sampleBuffer, BIN_SIZE);
         for (int binIndex = 0; binIndex < totalBinCount; binIndex++) {
             // Get the right number of samples from the inputFile
+            int sum = 0;
+            for (double j : sampleBuffer) {
+                sum += j;
+            }
+            returnBuffer [binIndex] = sum;
             // Sum all the samples together and store them in the returnBuffer
         }
         return returnBuffer;
@@ -68,7 +74,7 @@ public class MorseDecoder {
     /**
      * Convert power measurements to dots, dashes, and spaces.
      * <p>
-     * This function receives the result from binWavPower. It's job is to convert intervals of tone
+     * This function receives the result from binWavPower. Its job is to convert intervals of tone
      * or silence into dots (short tone), dashes (long tone), or space (long silence).
      * <p>
      * Write this function.
@@ -81,7 +87,12 @@ public class MorseDecoder {
          * There are four conditions to handle. Symbols should only be output when you see
          * transitions. You will also have to store how much power or silence you have seen.
          */
+        String
+        for (int i = 0; i < powerMeasurements.length; i+=2) {
+            if ((powerMeasurements[i] > POWER_THRESHOLD) && (powerMeasurements[i+1] > POWER_THRESHOLD)) {
 
+            }
+        }
         // if ispower and waspower
         // else if ispower and not waspower
         // else if issilence and wassilence
